@@ -12,7 +12,9 @@
     
     <div class="container">
       <div id="search-region">
-
+        <script type="x-handlebars-template" id="item-template">
+            <label>{{ title }}</label>
+        </script>
       </div>
       <div id="main-region" class="container">
         <p>Here is static content in the web page. You'll notice that it gets replaced by our app as soon as we start it.</p>
@@ -40,6 +42,9 @@
 
     <script src="./assets/js/app.js"></script>
     
+    <script src="./assets/js/apps/search/search_view.js"></script>
+    
+
     <script type="text/javascript">
       SearchApp.start();
     </script>
