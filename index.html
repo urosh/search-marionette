@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Marionette Search App</title>
+    <link href="./assets/css/application.css" rel="stylesheet">
+    <link href="./assets/css/jquery-ui-1.10.0.custom.css" rel="stylesheet">
+  </head>
+
+  <body>
+
+    
+    <div class="container">
+      <div id="search-region">
+
+      </div>
+      <div id="main-region" class="container">
+        <p>Here is static content in the web page. You'll notice that it gets replaced by our app as soon as we start it.</p>
+      </div>
+      
+
+      <div id="map-region">
+      </div>
+
+    </div>
+    
+    <div id="dialog-region"></div>
+
+
+    <script src="./assets/js/vendor/jquery.js"></script>
+    <script src="./assets/js/vendor/jquery-ui-1.10.3.js"></script>
+    <script src="./assets/js/vendor/json2.js"></script>
+    <script src="./assets/js/vendor/underscore.js"></script>
+    <script src="./assets/js/vendor/backbone.js"></script>
+    <script src="./assets/js/vendor/backbone.syphon.js"></script>
+    <script src="./assets/js/vendor/backbone.localstorage.js"></script>
+    <script src="./assets/js/vendor/backbone.marionette.js"></script>
+    <script src="./assets/js/vendor/spin.js"></script>
+    <script src="./assets/js/vendor/spin.jquery.js"></script>
+
+    <script src="./assets/js/app.js"></script>
+    
+    <script type="text/javascript">
+      SearchApp.start();
+    </script>
+  </body>
+</html>
