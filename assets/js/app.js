@@ -9,10 +9,12 @@ SearchApp.addRegions({
 SearchApp.on('initialize:after', function(){
 	// ok now i need to start thins up. 
 	// first we want to add search module. 
+	
+	SearchApp.Search.Controller.initializeSearch();
 
-	var searchView = new SearchApp.Search.Input(model: {
-		label: 'ajmo ajde'
-	});
-	SearchApp.searchRegion.show(searchView);
+});
+
+SearchApp.on('search:run', function(event){
+	// ok. 
 })
 

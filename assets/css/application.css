@@ -1,16 +1,35 @@
-body {
-  padding-top: 10px; /* 60px to make the container make room for the navigation bar */
+@import url(http://fonts.googleapis.com/css?family=Lato:300,400,700);
+
+body{
+	padding-top: 10px; /* 60px to make the container make room for the navigation bar */
+	background-color: #C0C0C0;
+	padding: 0px;
+	margin: 0px;
+	color:white;
+	font-family: 'Lato', Calibri, Arial, sans-serif;
+	font-size: 80%;
 }
+
+
+
 .container {
 	width: 1000px;
 	margin: auto;
 	border: solid 1px red;
 	overflow: auto;
+	margin-top: 10px
 }
+
+
 #search-region{
-	height: 40px;
+	min-height: 40px;
+	overflow: auto;
 	width: 100%;
+	padding: 0px;
+  line-height: 30px;
+
 }
+
 
 #main-region{
 	float: left;
@@ -24,3 +43,134 @@ body {
 	min-height: 400px;
 	border: solid 1px blue;
 }
+
+
+input[type="search"]{
+  width: 300px;
+  height: 30px;
+  border: solid 1px #2d3956;
+  font-size: 14px;
+}
+
+#pageContent{
+  overflow: auto;
+}
+
+.searchButton{
+ display: inline-block;
+  width: 80px;
+  height: 30px;
+  background-color: #66718b;
+  margin: 0px;
+  text-align: center;
+  text-decoration: none;
+  color: white;
+  padding: 0px;
+   
+}
+.searchButton:hover{
+  background-color: #2d3956;
+  
+}
+
+
+
+
+.advancedSearchLink{
+	display: block;
+	margin: 0;
+	padding: 0;
+	position: relative;
+}
+.advancedSearchLink a{
+	margin: 0;
+	padding: 0;
+	text-decoration: none;
+	color: #2d3956;
+	font-weight: bold;
+	
+}
+
+.advancedSearchLink a:after{
+	content: "\00BB";
+	font-size: 16px;
+	display: inline-block;
+  -webkit-transform: rotate(90deg);
+  -moz-transform: rotate(90deg);
+  -o-transform: rotate(90deg);
+  -ms-transform: rotate(90deg);
+  transform: rotate(90deg);
+  position: absolute;
+  left: 110px;
+}
+
+.advancedSearchLink a.down:after{
+-webkit-transform: rotate(-90deg);
+  -moz-transform: rotate(-90deg);
+  -o-transform: rotate(-90deg);
+  -ms-transform: rotate(-90deg);
+  transform: rotate(-90deg);
+  position: absolute;
+  top: 0px;
+  left: 106px;
+
+
+}
+
+
+#advancedSearch{
+	transition: opacity 0.4s linear,  height 0.4s;
+  color: #2d3956;
+  display: none; 
+
+}
+
+#advancedSearch.show{
+  transition-property: opacity 0.4s linear,  height 0.4s;
+  opacity: 1;
+}
+
+#advancedSearch section{
+  width: 250px;
+  float: left;
+  overflow: auto;
+}
+#advancedSearch h4{
+  margin: 0;
+}
+
+
+#advancedSearch ul {
+  margin: 0px;
+  padding: 0px;
+  list-style: none;
+
+}
+
+#advancedSearch ul li {
+  margin: 0;
+  padding: 0;
+  line-height: 16px;
+}
+
+#advancedSearch ul li label {
+  display: inline-block;
+  color: #2d3956;
+  
+
+}
+#advancedSearch input[type="checkbox"]{
+
+}
+
+#advancedSearch ul li span {
+  margin: 0px;
+  padding: 0px;
+  
+  display: inline-block;
+  width:180px;
+    color: #2d3956;
+
+}
+
+

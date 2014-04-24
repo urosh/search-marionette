@@ -12,9 +12,7 @@
     
     <div class="container">
       <div id="search-region">
-        <script type="x-handlebars-template" id="item-template">
-            <label>{{ title }}</label>
-        </script>
+       
       </div>
       <div id="main-region" class="container">
         <p>Here is static content in the web page. You'll notice that it gets replaced by our app as soon as we start it.</p>
@@ -27,7 +25,33 @@
     </div>
     
     <div id="dialog-region"></div>
+    <script type="x-handlebars-template" id="search-layout">
+      <input type="search" id="searchQuery"></input>
+      <a href="#" class='searchButton'>SEARCH</a>
+      <span class='advancedSearchLink'><a href="#">Advanced Search</a></span>
+      <div id="advancedSearch">
+        <section class="collections">
+          <h4>Choose collection</h4>
+          <ul>
+            {{#each collections}}
+              <li><label class='checkbox'><input type="checkbox" class="typeClass" value="{{this}}"/>{{this}}</label></li>
+            {{/each}}
+          </ul>
 
+        </section>
+        <section class="types">
+          <h4>Choose object type</h4>
+            <ul>
+            {{#each types}}
+              <li><label class='checkbox'><input type="checkbox" class="typeClass" value="{{type}}"/>{{title}}</label></li>
+            {{/each}}
+            </ul>
+        </section>
+    
+      </div>
+    </script>
+    
+    
 
     <script src="./assets/js/vendor/jquery.js"></script>
     <script src="./assets/js/vendor/jquery-ui-1.10.3.js"></script>
@@ -37,12 +61,16 @@
     <script src="./assets/js/vendor/backbone.syphon.js"></script>
     <script src="./assets/js/vendor/backbone.localstorage.js"></script>
     <script src="./assets/js/vendor/backbone.marionette.js"></script>
+    <script src="./assets/js/vendor/handlebars-v1.3.0.js"></script>
+    
     <script src="./assets/js/vendor/spin.js"></script>
     <script src="./assets/js/vendor/spin.jquery.js"></script>
 
     <script src="./assets/js/app.js"></script>
+    <script src="./assets/js/entities/search.js"></script>
     
     <script src="./assets/js/apps/search/search_view.js"></script>
+    <script src="./assets/js/apps/search/search_controller.js"></script>
     
 
     <script type="text/javascript">
