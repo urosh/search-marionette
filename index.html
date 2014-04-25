@@ -14,8 +14,10 @@
       <div id="search-region">
        
       </div>
-      <div id="main-region" class="container">
-        <p>Here is static content in the web page. You'll notice that it gets replaced by our app as soon as we start it.</p>
+      <div id="main" role="main" >
+        <ul id='tiles'>
+
+        </ul>
       </div>
       
 
@@ -25,6 +27,7 @@
     </div>
     
     <div id="dialog-region"></div>
+    
     <script type="x-handlebars-template" id="search-layout">
       <input type="search" id="searchQuery"></input>
       <a href="#" class='searchButton'>SEARCH</a>
@@ -51,10 +54,19 @@
       </div>
     </script>
     
+    <script type="x-handlebars-template" id="results-layout">
+      <a href="http://public.cyi.ac.cy/starcRepo/details/show/{{docID}}" data-lat="{{ lat }}" data-lng="{{ lng }}" target="_blank">
+            <img src="{{ imageLocation }}" width="100" height="{{ height }}"  ><p>{{ label }}</p>
+      
+         
+      </a>
+    </script>
     
 
     <script src="./assets/js/vendor/jquery.js"></script>
     <script src="./assets/js/vendor/jquery-ui-1.10.3.js"></script>
+    <script src="./assets/js/vendor/jquery.wookmark.min.js"></script>
+    
     <script src="./assets/js/vendor/json2.js"></script>
     <script src="./assets/js/vendor/underscore.js"></script>
     <script src="./assets/js/vendor/backbone.js"></script>
@@ -71,6 +83,9 @@
     
     <script src="./assets/js/apps/search/search_view.js"></script>
     <script src="./assets/js/apps/search/search_controller.js"></script>
+    
+    <script src="./assets/js/apps/results/results_view.js"></script>
+    <script src="./assets/js/apps/results/results_controller.js"></script>
     
 
     <script type="text/javascript">

@@ -2,7 +2,7 @@ var SearchApp = new Marionette.Application();
 
 SearchApp.addRegions({
 		'searchRegion': '#search-region',
-		'mainRegion': '#main-region',
+		'mainRegion': '#main',
 		'mapRegion': '#map-region'
 });
 
@@ -16,5 +16,6 @@ SearchApp.on('initialize:after', function(){
 
 SearchApp.on('search:run', function(event){
 	// ok. 
+	SearchApp.Results.Controller.getResults(event);
 })
 

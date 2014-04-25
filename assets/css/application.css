@@ -17,7 +17,7 @@ body{
 	margin: auto;
 	border: solid 1px red;
 	overflow: auto;
-	margin-top: 10px
+	
 }
 
 
@@ -28,18 +28,20 @@ body{
 	padding: 0px;
   line-height: 30px;
 
+
 }
 
 
-#main-region{
+#main{
 	float: left;
-	width: 400px;
+	width: 500px;
 	min-height: 400px;
+  border: solid 1px red;
 }
 
 #map-region{
 	float: right;
-	width: 550px;
+	width: 450px;
 	min-height: 400px;
 	border: solid 1px blue;
 }
@@ -172,5 +174,81 @@ input[type="search"]{
     color: #2d3956;
 
 }
+
+/* Loading div */
+#loaderDiv{
+  position: absolute;
+  top: 40px;
+  left: 220px;
+}
+
+#loaderCircle {
+  width: 16px;
+  height: 16px;
+  background: url(../images/loader2.gif);
+}
+
+/* Grid items */
+#tiles {
+  list-style-type: none;
+  position: relative; /** Needed to ensure items are laid out relative to this container **/
+  margin: 0;
+  padding: 0;
+}
+
+/**
+ * Grid items
+ */
+#tiles li {
+  width: 100px;
+  background-color: #ffffff;
+  border: 1px solid #dedede;
+          border-radius: 2px;
+     -moz-border-radius: 2px;
+  -webkit-border-radius: 2px;
+  display: none; /** Hide items initially to avoid a flicker effect **/
+  cursor: pointer;
+  padding: 4px;
+}
+
+#tiles li.inactive {
+  visibility: hidden;
+  opacity: 0;
+}
+
+#tiles li img {
+  display: block;
+}
+
+/**
+ * Grid item text
+ */
+#tiles li p {
+  color: #2d3956;
+  font-size: 13px;
+  line-height: 20px;
+  text-align: center;
+  font-weight: 400;
+  margin: 7px 2px 2px 2px;
+}
+
+#tiles li a{
+  text-decoration: none;
+}
+
+
+/**
+ * Placerholder css
+ */
+.wookmark-placeholder {
+          border-radius: 2px;
+     -moz-border-radius: 2px;
+  -webkit-border-radius: 2px;
+  background-color: #eee;
+  border: 1px solid #dedede;
+  z-index: -1;
+}
+
+
 
 
