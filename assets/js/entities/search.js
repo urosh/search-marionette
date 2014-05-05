@@ -40,14 +40,39 @@ SearchApp.module("Entities", function(Entities, SearchApp, Backbone, Marionette,
 			searchResults.fetch({
 				data: query,
 				success: function(res){
-					console.log('we are here');
+					Entities.results = res;
 					defer.resolve(res);
 				},
 				error: function(res){
 					defer.resolve(undefined);
 				}
 			});
+			
 			return defer.promise();
+		},
+		getExistingResults: function(){
+			return Entities.results;
+		},
+		getFilteredResults: function(e){
+			
+
+			var filteredCollection = new Entities.ResultsCollection();
+			Entities.results.each(function(item){
+			//console.log(item.get('lat') + " -- " + parseFloat(e[0].toFixed(5)));
+
+				if( item.get('lat') == parseFloat(e[0].toFixed(5)) && item.get('lng') == parseFloat(e[1].toFixed(5)) ) {
+					filteredCollection.push(item);
+				
+				}
+			}, this);
+			
+			return filteredCollection;
+			//return Entities.results;
+
+		
+		},
+		resetResults: function(){
+
 		}
 	}
 
@@ -59,6 +84,18 @@ SearchApp.module("Entities", function(Entities, SearchApp, Backbone, Marionette,
     
     return API.getResults(query);
   });
+
+  SearchApp.reqres.setHandler("access:results:entities", function(){
+  	return API.getExistingResults();
+  });
+
+  SearchApp.reqres.setHandler("filtered:results:entities", function(e){
+  	return API.getFilteredResults(e);
+
+  	
+  	//return API.getExistingResults();
+  });
+
 
 
 })

@@ -20,7 +20,12 @@ body{
 	
 }
 
-
+#menu-region{
+  min-height: 40px;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
 #search-region{
 	min-height: 40px;
 	overflow: auto;
@@ -34,18 +39,21 @@ body{
 
 #main{
 	float: left;
-	width: 500px;
+	width: 470px;
 	min-height: 400px;
   border: solid 1px red;
 }
 
 #map-region{
 	float: right;
-	width: 450px;
+	width: 490px;
 	min-height: 400px;
 	border: solid 1px blue;
 }
-
+.map{
+  width: 490px;
+  height: 400px;
+}
 
 input[type="search"]{
   width: 300px;
@@ -83,6 +91,7 @@ input[type="search"]{
 	margin: 0;
 	padding: 0;
 	position: relative;
+  z-index: 1;
 }
 .advancedSearchLink a{
 	margin: 0;

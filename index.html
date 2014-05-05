@@ -3,7 +3,10 @@
   <head>
     <meta charset="utf-8">
     <title>Marionette Search App</title>
-    <link href="./assets/css/application.css" rel="stylesheet">
+    
+    <link href="./assets/css/application.css" rel="stylesheet"> 
+    <link href="./assets/css/dropdown/style.css" rel="stylesheet">
+    
     <link href="./assets/css/jquery-ui-1.10.0.custom.css" rel="stylesheet">
   </head>
 
@@ -11,6 +14,21 @@
 
     
     <div class="container">
+      <div id="menu-region">
+        
+        <div class="wrapper-demo">
+          <div id="dd" class="wrapper-dropdown-5" tabindex="1">
+            Select tools
+            <ul class="dropdown">
+              <li><a href="#"><i class="icon-user"></i>Create new collection</a></li>
+              <li><a href="#"><i class="icon-cog"></i>Browse objects</a></li>
+              <li><a href="#"><i class="icon-remove"></i>Explore navigation paths</a></li>
+              <li><a href="#"><i class="icon-remove"></i>Show data connections</a></li>
+              
+            </ul>
+          </div>
+        </div> 
+      </div>
       <div id="search-region">
        
       </div>
@@ -22,6 +40,7 @@
       
 
       <div id="map-region">
+        
       </div>
 
     </div>
@@ -55,7 +74,7 @@
     </script>
     
     <script type="x-handlebars-template" id="results-layout">
-      <a href="http://public.cyi.ac.cy/starcRepo/details/show/{{docID}}" data-lat="{{ lat }}" data-lng="{{ lng }}" target="_blank">
+      <a class="tile" href="http://public.cyi.ac.cy/starcRepo/details/show/{{docID}}" data-lat="{{ lat }}" data-lng="{{ lng }}" target="_blank">
             <img src="{{ imageLocation }}" width="100" height="{{ height }}"  ><p>{{ label }}</p>
       
          
@@ -66,7 +85,10 @@
     <script src="./assets/js/vendor/jquery.js"></script>
     <script src="./assets/js/vendor/jquery-ui-1.10.3.js"></script>
     <script src="./assets/js/vendor/jquery.wookmark.min.js"></script>
-    
+    <script type="text/javascript"
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDXuSxAlefxRVSKVAaRX27QmBfrHNkhUug&sensor=true&region=CY">
+    </script>
+
     <script src="./assets/js/vendor/json2.js"></script>
     <script src="./assets/js/vendor/underscore.js"></script>
     <script src="./assets/js/vendor/backbone.js"></script>
@@ -86,10 +108,47 @@
     
     <script src="./assets/js/apps/results/results_view.js"></script>
     <script src="./assets/js/apps/results/results_controller.js"></script>
+
+    <script src="./assets/js/apps/map/map_view.js"></script>
+    <script src="./assets/js/apps/map/map_controller.js"></script>
     
+
+    
+    <script type="text/javascript">
+
+      function DropDown(el) {
+        this.dd = el;
+        this.initEvents();
+      }
+      DropDown.prototype = {
+        initEvents : function() {
+          var obj = this;
+
+          obj.dd.on('click', function(event){
+            $(this).toggleClass('active');
+            event.stopPropagation();
+          }); 
+        }
+      }
+
+      $(function() {
+
+        var dd = new DropDown( $('#dd') );
+
+        $(document).click(function() {
+          // all dropdowns
+          $('.wrapper-dropdown-5').removeClass('active');
+        });
+
+      });
+
+    </script>
+
+
 
     <script type="text/javascript">
       SearchApp.start();
     </script>
+    
   </body>
 </html>
