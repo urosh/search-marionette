@@ -6,6 +6,7 @@
     
     <link href="./assets/css/application.css" rel="stylesheet"> 
     <link href="./assets/css/dropdown/style.css" rel="stylesheet">
+    <link href="./assets/css/collection-module.css" rel="stylesheet">
     
     <link href="./assets/css/jquery-ui-1.10.0.custom.css" rel="stylesheet">
   </head>
@@ -16,18 +17,7 @@
     <div class="container">
       <div id="menu-region">
         
-        <div class="wrapper-demo">
-          <div id="dd" class="wrapper-dropdown-5" tabindex="1">
-            Select tools
-            <ul class="dropdown">
-              <li><a href="#"><i class="icon-user"></i>Create new collection</a></li>
-              <li><a href="#"><i class="icon-cog"></i>Browse objects</a></li>
-              <li><a href="#"><i class="icon-remove"></i>Explore navigation paths</a></li>
-              <li><a href="#"><i class="icon-remove"></i>Show data connections</a></li>
-              
-            </ul>
-          </div>
-        </div> 
+         
       </div>
       <div id="search-region">
        
@@ -46,7 +36,32 @@
     </div>
     
     <div id="dialog-region"></div>
-    
+    <script type="text/template" id="tools-menu">
+      <div class="wrapper-demo">
+        <div id="dd"  class="wrapper-dropdown-5" tabindex="1">
+          Select tools
+          <ul  class="dropdown">
+            <li><a href="#" data-module="search">Search objects</a></li>
+            <li><a href="#" data-module="map">Map of the objects</a></li>
+            <li><a href="#" data-module="create collection">Create new collection</a></li>
+            <li><a href="#" data-module="browse">Browse objects</a></li>
+            <li><a href="#" data-module="navigation paths">Explore navigation paths</a></li>
+            <li><a href="#" data-module="data connections">Show data connections</a></li>
+            
+          </ul>
+        </div>
+      </div>
+      <div class="active-modules-div"></div>
+    </script>
+
+    <script type="text/template" id="new-collection">
+      <div class="collections-div">
+      
+      </div>
+    </script>
+
+
+
     <script type="x-handlebars-template" id="search-layout">
       <input type="search" id="searchQuery"></input>
       <a href="#" class='searchButton'>SEARCH</a>
@@ -103,6 +118,10 @@
     <script src="./assets/js/app.js"></script>
     <script src="./assets/js/entities/search.js"></script>
     
+    <script src="./assets/js/apps/menu/menu_view.js"></script>
+    <script src="./assets/js/apps/menu/menu_controller.js"></script>
+    
+
     <script src="./assets/js/apps/search/search_view.js"></script>
     <script src="./assets/js/apps/search/search_controller.js"></script>
     
@@ -126,7 +145,7 @@
 
           obj.dd.on('click', function(event){
             $(this).toggleClass('active');
-            event.stopPropagation();
+            //event.stopPropagation();
           }); 
         }
       }
@@ -134,11 +153,6 @@
       $(function() {
 
         var dd = new DropDown( $('#dd') );
-
-        $(document).click(function() {
-          // all dropdowns
-          $('.wrapper-dropdown-5').removeClass('active');
-        });
 
       });
 

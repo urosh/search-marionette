@@ -44,7 +44,7 @@ SearchApp.module("Results", function(Results, SearchApp, Backbone, Marionette, $
 	    	//console.log(handler);
 	    });
 	    $("#tiles li .tile").on("mouseover", function(e){
-	    	$(this).append('<p>ajmo</p>');
+	    	$(this).append('<div class="collection-menu"><span class="icon-add"> </span><span class="icon-view"> </span></div>');
 	    	handler.wookmark(options);
 	    })
     }
