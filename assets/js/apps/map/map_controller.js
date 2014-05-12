@@ -1,6 +1,9 @@
 SearchApp.module("Map", function(Map, SearchApp, Backbone, Marionette, $, _){
 	Map.Controller = {
 		mapView: {},
+		moduleInteractionIn: {
+			
+		},
 		initializeMap: function(){
 			this.mapView = new Map.MapView({});
 			SearchApp.mapRegion.show(this.mapView);
@@ -18,6 +21,9 @@ SearchApp.module("Map", function(Map, SearchApp, Backbone, Marionette, $, _){
 				SearchApp.trigger("map:reset:results");
 			});
 
+		},
+		serveModules: function(){
+			console.log('serving map module');
 		}
 	}
 })

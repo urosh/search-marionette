@@ -18,7 +18,34 @@ SearchApp.module("Entities", function(Entities, SearchApp, Backbone, Marionette,
 		model: Entities.ResultsModel,
 		url: 'http://public.cyi.ac.cy/starcRepo/map/search',
 
-	})
+	});
+	Entities.activeModulesList = [
+		{"name" : "search", "text" : "Search objects", "module": "search", "moduleName": "Search"},
+		{"name" : "results", "text" : "Search results", "module": "results", "moduleName": "Results"},
+		{"name" : "map", "text" : "Objects locations", "module": "map", "moduleName": "Map"}
+	];
+
+	Entities.availableModulesList = [
+		{"name" : "search", "text" : "Search objects", "module": "search", "moduleName": "Search"},
+		{"name" : "browse", "text" : "Browse objects", "module": "browse", "moduleName": "Browse"},
+		{"name" : "results", "text" : "Search results", "module": "results", "moduleName": "Results"},
+		{"name" : "map", "text" : "Objects locations", "module": "map", "moduleName": "Map"},
+		{"name" : "collection", "text" : "Create collections", "module": "collection", "moduleName": "Collection"},
+		{"name" : "connections", "text" : "Explore connections", "module": "connections", "moduleName": "Connections"},
+		{"name" : "navigation paths", "text" : "Explore navigation paths", "module": "navigation_paths", "moduleName": "Paths"},
+		{"name" : "clustering", "text" : "Explore clusters", "module": "clustering", "moduleName": "Clustering"}
+	];
+
+
+
+	Entities.ModuleList = Backbone.Model.extend({
+		defaults:{
+			active: Entities.activeModulesList,
+			modules: Entities.availableModulesList
+		}
+		
+	});
+
 
 	var API = {
 		getSearchInits: function(){
@@ -54,8 +81,6 @@ SearchApp.module("Entities", function(Entities, SearchApp, Backbone, Marionette,
 			return Entities.results;
 		},
 		getFilteredResults: function(e){
-			
-
 			var filteredCollection = new Entities.ResultsCollection();
 			Entities.results.each(function(item){
 			//console.log(item.get('lat') + " -- " + parseFloat(e[0].toFixed(5)));
@@ -67,13 +92,40 @@ SearchApp.module("Entities", function(Entities, SearchApp, Backbone, Marionette,
 			}, this);
 			
 			return filteredCollection;
-			//return Entities.results;
+		},
+		getModuleList: function(){
+			return new Entities.ModuleList();
+		},
+		addActiveModule: function(e){
+			for (var i = 0, j = Entities.availableModulesList.length; i < j; i++){
+  		if(e === Entities.availableModulesList[i].name){
+  				Entities.activeModulesList.push(Entities.availableModulesList[i]);
+  			}
+  		}
+		},
+		removeActiveModule: function(e){
+			for (var i = 0, j = Entities.activeModulesList.length; i < j; i++){
+  		if(e === Entities.activeModulesList[i].name){
+  				var index = i;
+  			}
+  		}
+
+  		Entities.activeModulesList.splice(index, 1);
+		},
+		getActiveModuleList: function(){
+			return Entities.activeModulesList;
+		},
+		getModuleName: function(e){
+			console.log(e);
+			for (var i = 0, j = Entities.activeModulesList.length; i < j; i++){
+  		if(e === Entities.activeModulesList[i].name){
+  				return Entities.activeModulesList[i].moduleName;
+  			}
+  		}
+  		return "";
+		}
 
 		
-		},
-		resetResults: function(){
-
-		}
 	}
 
 	SearchApp.reqres.setHandler("searchInits:entities", function(){
@@ -91,11 +143,27 @@ SearchApp.module("Entities", function(Entities, SearchApp, Backbone, Marionette,
 
   SearchApp.reqres.setHandler("filtered:results:entities", function(e){
   	return API.getFilteredResults(e);
-
-  	
-  	//return API.getExistingResults();
   });
 
+  SearchApp.reqres.setHandler("modules:entities", function(){
+  	return API.getModuleList();
+  });
 
+  SearchApp.reqres.setHandler("module:add:entities", function(e){
+  	API.addActiveModule(e);
+  });
+
+  SearchApp.reqres.setHandler("module:remove:entities", function(e){
+  	API.removeActiveModule(e);
+  });
+
+  SearchApp.reqres.setHandler("active:modules:entities", function(){
+  	return API.getActiveModuleList();
+  });
+
+  SearchApp.reqres.setHandler("name:module:entities", function(e){
+  	return API.getModuleName(e);
+  })
+  
 
 })

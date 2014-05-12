@@ -7,6 +7,7 @@
     <link href="./assets/css/application.css" rel="stylesheet"> 
     <link href="./assets/css/dropdown/style.css" rel="stylesheet">
     <link href="./assets/css/collection-module.css" rel="stylesheet">
+    <link href="./assets/css/modal.css" rel="stylesheet">
     
     <link href="./assets/css/jquery-ui-1.10.0.custom.css" rel="stylesheet">
   </head>
@@ -22,43 +23,46 @@
       <div id="search-region">
        
       </div>
-      <div id="main" role="main" >
-        <ul id='tiles'>
 
-        </ul>
+      <div id="main" role="main" >
+        
+      </div>
+      
+      <div id="right-container">
+        <div id="collection-region" class="off-region">
+
+        </div>
+        <div id="map-region">
+        
+        </div>
       </div>
       
 
-      <div id="map-region">
-        
-      </div>
-
     </div>
     
-    <div id="dialog-region"></div>
-    <script type="text/template" id="tools-menu">
+    <div  class="md-modal"></div>
+    <div class="md-overlay"></div>
+
+    <script type="x-handlebars-template"  id="tools-menu">
       <div class="wrapper-demo">
         <div id="dd"  class="wrapper-dropdown-5" tabindex="1">
           Select tools
           <ul  class="dropdown">
-            <li><a href="#" data-module="search">Search objects</a></li>
-            <li><a href="#" data-module="map">Map of the objects</a></li>
-            <li><a href="#" data-module="create collection">Create new collection</a></li>
-            <li><a href="#" data-module="browse">Browse objects</a></li>
-            <li><a href="#" data-module="navigation paths">Explore navigation paths</a></li>
-            <li><a href="#" data-module="data connections">Show data connections</a></li>
-            
+            {{#each modules}}
+              <li><a href="#" data-module="{{ name }}">{{ text }}</a></li>
+            {{/each}}
+           
           </ul>
         </div>
       </div>
-      <div class="active-modules-div"></div>
-    </script>
-
-    <script type="text/template" id="new-collection">
-      <div class="collections-div">
-      
+      <div class="active-modules-div">
+        {{#each active}}
+          <div class="moduleTab"> {{ name }} <div data-module="{{ name }}" class="icon-remove"></div></div>
+        {{/each}}
       </div>
     </script>
+
+    
 
 
 
@@ -89,12 +93,28 @@
     </script>
     
     <script type="x-handlebars-template" id="results-layout">
-      <a class="tile" href="http://public.cyi.ac.cy/starcRepo/details/show/{{docID}}" data-lat="{{ lat }}" data-lng="{{ lng }}" target="_blank">
+      <a class="tile" href="http://public.cyi.ac.cy/starcRepo/details/show/{{docID}}" data-id= "{{ docID }}" data-lat="{{ lat }}" data-lng="{{ lng }}" target="_blank">
             <img src="{{ imageLocation }}" width="100" height="{{ height }}"  ><p>{{ label }}</p>
       
          
       </a>
     </script>
+
+    <script type="x-handlebars-template" id="new-collection">
+      <div id="collection-menu23">Here some menu for collection module.</div>
+      <div class="collections-div32">
+        <p>Ajmo ajde svi u napda</p>
+          <p>I kako smo se voleli nas dvoje</p>
+        <div id="items44"></div>
+      </div>
+    </script>
+
+    <script type="text/template" id="loading-view">
+      <h1><%- title %></h1>
+      <p><%- message %></p>
+      <div id="spinner"></div>
+    </script>
+
     
 
     <script src="./assets/js/vendor/jquery.js"></script>
@@ -112,11 +132,22 @@
     <script src="./assets/js/vendor/backbone.marionette.js"></script>
     <script src="./assets/js/vendor/handlebars-v1.3.0.js"></script>
     
+    
+
     <script src="./assets/js/vendor/spin.js"></script>
     <script src="./assets/js/vendor/spin.jquery.js"></script>
 
+    <script src="./assets/js/apps/cfg/marionette/regions/dialog.js"></script>
+      
+
     <script src="./assets/js/app.js"></script>
     <script src="./assets/js/entities/search.js"></script>
+    
+    
+
+    <script src="./assets/js/apps/layout_module.js"></script>
+    
+    <script src="./assets/js/apps/common/views.js"></script>
     
     <script src="./assets/js/apps/menu/menu_view.js"></script>
     <script src="./assets/js/apps/menu/menu_controller.js"></script>
@@ -131,7 +162,9 @@
     <script src="./assets/js/apps/map/map_view.js"></script>
     <script src="./assets/js/apps/map/map_controller.js"></script>
     
-
+    <script src="./assets/js/apps/collection/collection_view.js"></script>
+    <script src="./assets/js/apps/collection/collection_controller.js"></script>
+    
     
     <script type="text/javascript">
 

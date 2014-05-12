@@ -1,5 +1,8 @@
 SearchApp.module("Search", function(Search, SearchApp, Backbone, Marionette, $, _){
 	Search.Controller = {
+		moduleInteractionIn: {
+		
+		},
 		initializeSearch: function(){
 			
 			
@@ -19,6 +22,9 @@ SearchApp.module("Search", function(Search, SearchApp, Backbone, Marionette, $, 
 			
 			
 		},
+		serveModules: function(){
+			console.log('serving search module');
+		}
 
 	}
 })
