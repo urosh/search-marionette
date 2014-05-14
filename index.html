@@ -109,9 +109,32 @@
       </div>
     </script>
 
+    <script type="x-handlebars-template" id="details-template">
+      
+      <span class="md-icon-close"></span>
+      <div class="details-modal">
+
+        <div class="image-container">
+          <p class="title"> {{ title }} </p>
+          <img src="{{ imageLocation  }}" width="350"/>
+        </div>
+        <div class="metadata-container">
+          {{#each metadataList}}
+            {{#each this}}
+            <p>
+              <span class="metadata-label">{{@key}}</span>: <span class='metadata-content'> {{this}}</span>
+            </p>
+            {{/each }}
+            
+          {{/each}}
+          
+        </div>
+      </div>
+    </script>
+
+
     <script type="text/template" id="loading-view">
       <h1><%- title %></h1>
-      <p><%- message %></p>
       <div id="spinner"></div>
     </script>
 
@@ -164,6 +187,9 @@
     
     <script src="./assets/js/apps/collection/collection_view.js"></script>
     <script src="./assets/js/apps/collection/collection_controller.js"></script>
+    
+    <script src="./assets/js/apps/details/details_view.js"></script>
+    <script src="./assets/js/apps/details/details_controller.js"></script>
     
     
     <script type="text/javascript">

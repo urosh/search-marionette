@@ -7,15 +7,17 @@ Marionette.Region.Dialog = Marionette.Region.extend({
     var overlay = $('.md-overlay' );
     
     var modal = $('.md-modal' ),
-      close = $('.md-close' );
+      close = $('.md-icon-close' );
     
       
       
     setTimeout(function(){
       modal.addClass('md-show' );
+      //modal.append("<input type='button' class='close-modal'/>")
     }, 1);
 
     function removeModalHandler() {
+        //this.close();
         modal.removeClass('md-show' );
     }
     overlay.on( 'click', removeModalHandler );
@@ -25,13 +27,7 @@ Marionette.Region.Dialog = Marionette.Region.extend({
       removeModalHandler();
     });
   },
-  onRender:function(view){
-    console.log('ohoj');
-  },
+  
 
-  closeDialog: function(){
-    this.stopListening();
-    this.close();
-    this.$el.dialog("destroy");
-  }
+  
 });

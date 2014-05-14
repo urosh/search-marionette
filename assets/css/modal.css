@@ -7,6 +7,32 @@
 .clearfix:after { clear: both; }
 
 
+@font-face {
+	font-family: 'my-icons';
+	src:url('fonts/my-icons.eot?wxs9c7');
+	src:url('fonts/my-icons.eot?#iefixwxs9c7') format('embedded-opentype'),
+		url('fonts/my-icons.woff?wxs9c7') format('woff'),
+		url('fonts/my-icons.ttf?wxs9c7') format('truetype'),
+		url('fonts/my-icons.svg?wxs9c7#my-icons') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+[class^="md-icon-"], [class*=" md-icon-"] {
+	font-family: 'my-icons';
+	speak: none;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+	font-size: 14px;
+	color: #2d3956 ;
+	/* Better Font Rendering =========== */
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
 
 button {
 	border: none;
@@ -68,7 +94,7 @@ perspective effects (not including the modals and the overlay).
 	left: 0;
 	z-index: 1000;
 	opacity: 0;
-	background: rgba(143,27,15,0.8);
+	background: rgba(45,57,86,0.8);
 	-webkit-transition: all 0.3s;
 	-moz-transition: all 0.3s;
 	transition: all 0.3s;
@@ -81,13 +107,13 @@ perspective effects (not including the modals and the overlay).
 
 /* Content styles */
 .md-content {
-	color: #fff;
-	background: #e74c3c;
-	background: green;
+	color: #2d3956;
+	background: #eee;
 	
 	position: relative;
-	border-radius: 3px;
 	margin: 0 auto;
+	min-height: 300px;
+	overflow: auto;
 }
 
 .md-content h3 {
@@ -101,13 +127,54 @@ perspective effects (not including the modals and the overlay).
 	border-radius: 3px 3px 0 0;
 }
 
-.md-content > div {
-	padding: 15px 40px 30px;
+
+.md-content  {
+	padding: 15px ;
 	margin: 0;
 	font-weight: 300;
 	font-size: 1.15em;
+	position: relative;
+}
+.metadata-label{
+	font-weight: 500;
+
+}
+.metadata-container{
+	float: right;
+	margin: 15px 0 0;
+	width: 240px;
+	padding: 0;
+	max-height: 650px;
+	overflow-y: auto;
+}
+.image-container{
+	width: 350px;
+	margin: 0;
+	padding: 0;
+	float: left;
+}
+.md-icon-close{
+	display: inline-block;
+	position: absolute;
+	top: 5px;
+	right: 5px;
 }
 
+.md-icon-close:before {
+	content: "\e639";
+}
+.md-icon-close:hover:before {
+	color: #66718b;
+}
+
+.details-modal .title{
+	margin: 0 0 5px;
+	font-size: 18px;
+	font-weight: 600;
+}
+
+
+/*
 .md-content > div p {
 	margin: 0;
 	padding: 10px 0;
@@ -127,6 +194,7 @@ perspective effects (not including the modals and the overlay).
 	margin: 0 auto;
 	font-size: 0.8em;
 }
+*/
 
 /* Individual modal styles with animations/transitions */
 

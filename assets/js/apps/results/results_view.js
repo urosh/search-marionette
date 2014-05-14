@@ -19,15 +19,16 @@ SearchApp.module("Results", function(Results, SearchApp, Backbone, Marionette, $
     tagName: 'ul',
     initialize: function(){
     	this.$el.prop('id', 'tiles');
+
     },
     
     events: {
-			"mouseover #main #tiles li.tile": "editClicked",
-			"click li": "editClicked"
-		},
-		editClicked: function(){
-		
-		},
+    	"mouseover #main #tiles li.tile": "editClicked",
+    	"click li": "editClicked"
+    },
+	editClicked: function(){
+	
+	},
     itemView: Results.ItemView,
     setTiles: function(opt){
     	var opt = opt || {};

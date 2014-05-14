@@ -5,7 +5,9 @@ SearchApp.module("Common.Views", function(Views, ContactManager, Backbone, Mario
     initialize: function(options){
       var options = options || {};
       this.title = options.title || "Loading Data";
-      this.message = options.message || "Please wait, data is loading.";
+      this.modal = options.modal || false;
+      console.log(options.modal);
+
     },
 
     serializeData: function(){
@@ -16,6 +18,10 @@ SearchApp.module("Common.Views", function(Views, ContactManager, Backbone, Mario
     },
 
     onShow: function(){
+      if(this.modal) {
+        
+        $('.md-modal > div').addClass('md-content');
+      }
       var opts = {
         lines: 13, // The number of lines to draw
         length: 20, // The length of each line

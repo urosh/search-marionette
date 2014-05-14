@@ -42,10 +42,11 @@ body{
 	width: 470px;
 	min-height: 400px;
   border: solid 1px red;
+
 }
 
 #map-region{
-	width: 490px;
+	width: 520px;
 	min-height: 400px;
 }
 #right-container{
@@ -53,7 +54,7 @@ body{
   border: solid 1px green;
 }
 .map{
-  width: 490px;
+  width: 520px;
   height: 400px;
 }
 
@@ -158,6 +159,7 @@ input[type="search"]{
   padding: 0px;
   list-style: none;
 
+
 }
 
 #advancedSearch ul li {
@@ -205,6 +207,7 @@ input[type="search"]{
   position: relative; /** Needed to ensure items are laid out relative to this container **/
   margin: 0;
   padding: 0;
+  
 }
 
 /**

@@ -5,7 +5,13 @@ SearchApp.module("Entities", function(Entities, SearchApp, Backbone, Marionette,
 	Entities.SearchInitModel = Backbone.Model.extend({
 		
 		url: 'http://public.cyi.ac.cy/starcRepo/map/init',
-	})
+	});
+
+	Entities.Details = Backbone.Model.extend({
+		
+		url: 'http://public.cyi.ac.cy/starcRepo/map/details',
+	});
+
 	Entities.SearchInitCollection = Backbone.Collection.extend({
 		url: 'http://public.cyi.ac.cy/starcRepo/map/init',
 		model: Entities.SearchInitModel
@@ -109,21 +115,39 @@ SearchApp.module("Entities", function(Entities, SearchApp, Backbone, Marionette,
   				var index = i;
   			}
   		}
-
   		Entities.activeModulesList.splice(index, 1);
 		},
 		getActiveModuleList: function(){
 			return Entities.activeModulesList;
 		},
 		getModuleName: function(e){
-			console.log(e);
 			for (var i = 0, j = Entities.activeModulesList.length; i < j; i++){
   		if(e === Entities.activeModulesList[i].name){
   				return Entities.activeModulesList[i].moduleName;
   			}
   		}
   		return "";
+		},
+		getItemDetails: function(e){
+			var item = new Entities.Details();
+			var defer = $.Deferred();
+			item.fetch({
+				data: {'docID': e},
+				success: function(res){
+					console.log(res);
+					// process the result into correct format
+					
+					Entities.item = res;
+					defer.resolve(res);
+				},
+				error: function(res){
+					defer.resolve(undefined);
+				}
+			});
+			
+			return defer.promise();
 		}
+
 
 		
 	}
@@ -163,7 +187,11 @@ SearchApp.module("Entities", function(Entities, SearchApp, Backbone, Marionette,
 
   SearchApp.reqres.setHandler("name:module:entities", function(e){
   	return API.getModuleName(e);
-  })
+  });
+
+  SearchApp.reqres.setHandler("details:entities", function(e){
+  	return API.getItemDetails(e);
+  });
   
 
 })

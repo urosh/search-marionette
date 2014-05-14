@@ -86,11 +86,11 @@
 }
 
 #collection-region{
-	width: 490px;
+	width: 520px;
 	height: 430px;
 	float: right;
 	margin-bottom: 5px;
-	background-color: green;
+	background-color: #eee;
 
 }
 

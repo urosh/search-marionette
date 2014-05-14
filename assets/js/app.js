@@ -44,7 +44,10 @@ SearchApp.on("results:show:item", function(e){
 	// ok now i need details module, that will show object details in 
 	// the modal window. 
 	// Lets see how this will work.
-})
+	SearchApp.Details.Controller.initializeModule(e);
+	
+
+});
 
 SearchApp.on("module:add", function(e){
 	//add new module;
@@ -80,7 +83,7 @@ SearchApp.on("module:active:notification", function(e){
 	for(var i = 0, j = activeModules.length; i < j; i++){
 		SearchApp[activeModules[i].moduleName].Controller.serveModules();
 	}
-})
+});
 
 
 
