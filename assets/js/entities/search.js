@@ -1,4 +1,4 @@
-SearchApp.module("Entities", function(Entities, SearchApp, Backbone, Marionette, $, _){
+SearchApp.module("Search.Entities", function(Entities, SearchApp, Backbone, Marionette, $, _){
 	//ok here i need to have model, 
 	//collection 
 	//for initializing search first. 
@@ -25,32 +25,17 @@ SearchApp.module("Entities", function(Entities, SearchApp, Backbone, Marionette,
 		url: 'http://public.cyi.ac.cy/starcRepo/map/search',
 
 	});
-	Entities.activeModulesList = [
-		{"name" : "search", "text" : "Search objects", "module": "search", "moduleName": "Search"},
-		{"name" : "results", "text" : "Search results", "module": "results", "moduleName": "Results"},
-		{"name" : "map", "text" : "Objects locations", "module": "map", "moduleName": "Map"}
-	];
 
-	Entities.availableModulesList = [
-		{"name" : "search", "text" : "Search objects", "module": "search", "moduleName": "Search"},
-		{"name" : "browse", "text" : "Browse objects", "module": "browse", "moduleName": "Browse"},
-		{"name" : "results", "text" : "Search results", "module": "results", "moduleName": "Results"},
-		{"name" : "map", "text" : "Objects locations", "module": "map", "moduleName": "Map"},
-		{"name" : "collection", "text" : "Create collections", "module": "collection", "moduleName": "Collection"},
-		{"name" : "connections", "text" : "Explore connections", "module": "connections", "moduleName": "Connections"},
-		{"name" : "navigation paths", "text" : "Explore navigation paths", "module": "navigation_paths", "moduleName": "Paths"},
-		{"name" : "clustering", "text" : "Explore clusters", "module": "clustering", "moduleName": "Clustering"}
-	];
+	Entities.Collection = Backbone.Collection.extend({
 
-
-
-	Entities.ModuleList = Backbone.Model.extend({
-		defaults:{
-			active: Entities.activeModulesList,
-			modules: Entities.availableModulesList
-		}
-		
 	});
+
+	Entities.CollectionsCollection = Backbone.Collection.extend({
+		model: Entities.Collection
+	});
+
+	Entities.collectionsCollection = new Entities.CollectionsCollection();
+
 
 
 	var API = {
@@ -70,9 +55,11 @@ SearchApp.module("Entities", function(Entities, SearchApp, Backbone, Marionette,
 		getResults: function(query){
 			var searchResults = new Entities.ResultsCollection();
 			var defer = $.Deferred();
+
 			searchResults.fetch({
 				data: query,
 				success: function(res){
+					Entities.results = {};
 					Entities.results = res;
 					defer.resolve(res);
 				},
@@ -99,35 +86,7 @@ SearchApp.module("Entities", function(Entities, SearchApp, Backbone, Marionette,
 			
 			return filteredCollection;
 		},
-		getModuleList: function(){
-			return new Entities.ModuleList();
-		},
-		addActiveModule: function(e){
-			for (var i = 0, j = Entities.availableModulesList.length; i < j; i++){
-  		if(e === Entities.availableModulesList[i].name){
-  				Entities.activeModulesList.push(Entities.availableModulesList[i]);
-  			}
-  		}
-		},
-		removeActiveModule: function(e){
-			for (var i = 0, j = Entities.activeModulesList.length; i < j; i++){
-  		if(e === Entities.activeModulesList[i].name){
-  				var index = i;
-  			}
-  		}
-  		Entities.activeModulesList.splice(index, 1);
-		},
-		getActiveModuleList: function(){
-			return Entities.activeModulesList;
-		},
-		getModuleName: function(e){
-			for (var i = 0, j = Entities.activeModulesList.length; i < j; i++){
-  		if(e === Entities.activeModulesList[i].name){
-  				return Entities.activeModulesList[i].moduleName;
-  			}
-  		}
-  		return "";
-		},
+		
 		getItemDetails: function(e){
 			var item = new Entities.Details();
 			var defer = $.Deferred();
@@ -146,52 +105,62 @@ SearchApp.module("Entities", function(Entities, SearchApp, Backbone, Marionette,
 			});
 			
 			return defer.promise();
+		},
+		getObjectDetailsId: function(e){
+			Entities.results.each(function(item){
+			//console.log(item.get('lat') + " -- " + parseFloat(e[0].toFixed(5)));
+				if( item.get('docID') === e ) {
+
+					var newId = Entities.collectionsCollection.length + item.get('id');
+					item.set({'id': newId});
+					Entities.collectionsCollection.add(item)
+					return(item);
+				}
+			});
+			return {};
+		},
+		getCollectionsData: function(){
+			return Entities.collectionsCollection;
 		}
 
 
 		
 	}
 
-	SearchApp.reqres.setHandler("searchInits:entities", function(){
+	SearchApp.reqres.setHandler("getInits:search:entities", function(){
     return API.getSearchInits();
   });
 
-  SearchApp.reqres.setHandler("results:entities", function(query){
+  SearchApp.reqres.setHandler("getResults:search:entities", function(query){
     
     return API.getResults(query);
   });
 
-  SearchApp.reqres.setHandler("access:results:entities", function(){
+  SearchApp.reqres.setHandler("accessResultsData:search:entities", function(){
   	return API.getExistingResults();
   });
 
-  SearchApp.reqres.setHandler("filtered:results:entities", function(e){
+  SearchApp.reqres.setHandler("filterResults:search:entities", function(e){
   	return API.getFilteredResults(e);
   });
-
-  SearchApp.reqres.setHandler("modules:entities", function(){
-  	return API.getModuleList();
-  });
-
-  SearchApp.reqres.setHandler("module:add:entities", function(e){
-  	API.addActiveModule(e);
-  });
-
-  SearchApp.reqres.setHandler("module:remove:entities", function(e){
-  	API.removeActiveModule(e);
-  });
-
-  SearchApp.reqres.setHandler("active:modules:entities", function(){
-  	return API.getActiveModuleList();
-  });
-
-  SearchApp.reqres.setHandler("name:module:entities", function(e){
-  	return API.getModuleName(e);
-  });
+  /* Module entities */
+  
 
   SearchApp.reqres.setHandler("details:entities", function(e){
   	return API.getItemDetails(e);
   });
+
+  SearchApp.reqres.setHandler("get:object:id", function(e){
+  	
+  	return API.getObjectDetailsId(e);
+  });
+
+  SearchApp.reqres.setHandler("get:collections:data", function(e){
+  	
+  	return API.getCollectionsData();
+  });
+
+
   
 
 })

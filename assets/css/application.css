@@ -37,7 +37,7 @@ body{
 }
 
 
-#main{
+#main-region{
 	float: left;
 	width: 470px;
 	min-height: 400px;
@@ -188,6 +188,13 @@ input[type="search"]{
 
 }
 
+
+
+/* Results */
+#main{
+  background-color: #66718b;
+}
+
 /* Loading div */
 #loaderDiv{
   position: absolute;
@@ -207,7 +214,7 @@ input[type="search"]{
   position: relative; /** Needed to ensure items are laid out relative to this container **/
   margin: 0;
   padding: 0;
-  
+
 }
 
 /**

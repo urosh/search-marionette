@@ -6,7 +6,7 @@ SearchApp.module("Search", function(Search, SearchApp, Backbone, Marionette, $, 
 		initializeSearch: function(){
 			
 			
-			var fetchingContacts = SearchApp.request("searchInits:entities");
+			var fetchingContacts = SearchApp.request("getInits:search:entities");
 			
 			
 			$.when(fetchingContacts).done(function(inits){
@@ -23,7 +23,13 @@ SearchApp.module("Search", function(Search, SearchApp, Backbone, Marionette, $, 
 			
 		},
 		serveModules: function(){
-			console.log('serving search module');
+			this.activeModules = SearchApp.request("getActiveModules:modules:entities");
+			for(var i = 0, j = this.activeModules.length; i < j; i++){
+				if(this.moduleInteractionIn.hasOwnProperty( this.activeModules[i].module )){
+    			this.moduleInteractionIn[this.activeModules[i].module]();	
+    		}
+    		
+    	}
 		}
 
 	}

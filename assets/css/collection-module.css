@@ -27,6 +27,9 @@
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 }
+
+
+
 .collection-menu span{
 	display: inline-block;
 	width: 14px;
@@ -88,11 +91,28 @@
 #collection-region{
 	width: 520px;
 	height: 430px;
+	overflow: auto;
 	float: right;
 	margin-bottom: 5px;
 	background-color: #eee;
+	color: #2d3956;
+	font-size: 14px;
 
 }
+
+#collection-region .item-container{
+	display: inline-block;
+	float: left;
+	padding: 2px;
+	margin: 0 2px 2px 0;
+	height: 60px;
+	background-color: #66718b;
+}
+
+#collection-region .item-container:hover{
+	background-color: #2d3956;
+}
+
 
 .off-region{
 	display: none;
@@ -102,5 +122,68 @@
 	display: inline-block;
 	opacity: 1; -webkit-transition: opacity 1s;
 }
+
+[class^="collection-icon-"], [class*=" collection-icon-"] {
+	font-family: 'my-icons';
+	speak: none;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+	font-size: 22px;
+	background-color: #66718b;
+	color: #fff;
+	width: 22px;
+	height: 22px;
+	padding: 4px;
+	line-height: 22px;
+	display: inline-block;
+	/* Better Font Rendering =========== */
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	margin: 0px;
+	cursor: pointer;
+}
+
+[class^="collection-icon-"]:hover, [class*=" collection-icon-"]:hover{
+	background-color: #2d3956;
+}
+
+#collection-menu{
+	padding: 0px;
+	margin: 0px;
+	line-height: 24px;
+	height: 28px;
+	padding: 3px;
+}
+
+#collection-content{
+	padding: 5px;
+}
+
+.collection-icon-1:before {
+	content: "\e603";
+}
+.collection-icon-1:hover:before {
+
+}
+
+.collection-icon-2:before {
+	content: "\e600";
+}
+.collection-icon-3:before {
+	content: "\e601";
+}
+.collection-icon-4:before {
+	content: "\e604";
+}
+.collection-icon-5:before {
+	content: "\e602";
+}
+.collection-icon-6:before {
+	content: "\e635";
+}
+
 
 

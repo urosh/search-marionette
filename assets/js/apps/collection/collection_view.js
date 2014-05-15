@@ -1,13 +1,15 @@
 SearchApp.module("Collection", function(Collection, SearchApp, Backbone, Marionette, $, _){
 	Collection.CollectionItemView = Marionette.ItemView.extend({
-		template: Handlebars.compile($('#new-collection').html()),
-		className: 'md-content'
+		template: Handlebars.compile($('#collection-item').html()),
+		className: 'item-container'
 	});
 
-	Collection.CollectionsModuleView = Marionette.CompositeView.extend({
-		template: "#new-collection",
+	Collection.CollectionModuleView = Marionette.CompositeView.extend({
+		className: "collection-div",
+		template: '#new-collection',
 		itemView: Collection.CollectionItemView,
-		itemViewContainer: "#items"
+		itemViewContainer: "#collection-content",
+		
 	});
 
 })

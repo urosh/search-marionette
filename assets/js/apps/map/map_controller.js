@@ -10,7 +10,7 @@ SearchApp.module("Map", function(Map, SearchApp, Backbone, Marionette, $, _){
 
 		},
 		populateMap: function(){
-			var fetchingResults = SearchApp.request("access:results:entities");
+			var fetchingResults = SearchApp.request("accessResultsData:search:entities");
 			var that = this;
 			that.mapView.showObjects(fetchingResults);		
 			that.mapView.on("map:marker:click", function(e){
@@ -23,7 +23,13 @@ SearchApp.module("Map", function(Map, SearchApp, Backbone, Marionette, $, _){
 
 		},
 		serveModules: function(){
-			console.log('serving map module');
+			this.activeModules = SearchApp.request("getActiveModules:modules:entities");
+			for(var i = 0, j = this.activeModules.length; i < j; i++){
+				if(this.moduleInteractionIn.hasOwnProperty( this.activeModules[i].module )){
+    			this.moduleInteractionIn[this.activeModules[i].module]();	
+    		}
+    		
+    	}
 		}
 	}
 })

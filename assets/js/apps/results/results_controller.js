@@ -20,7 +20,7 @@ SearchApp.module("Results", function(Results, SearchApp, Backbone, Marionette, $
       SearchApp.mainRegion.show(loadingView);
       // ok here i need a list of active modules. 
       
-      var fetchingResults = SearchApp.request("results:entities", query);
+      var fetchingResults = SearchApp.request("getResults:search:entities", query);
 			var that = this;
 			$.when(fetchingResults).done(function(results){
 				//loadingView.remove();
@@ -33,7 +33,7 @@ SearchApp.module("Results", function(Results, SearchApp, Backbone, Marionette, $
 
 		},
 		serveModules: function(){
-			this.activeModules = SearchApp.request("active:modules:entities");
+			this.activeModules = SearchApp.request("getActiveModules:modules:entities");
 				for(var i = 0, j = this.activeModules.length; i < j; i++){
 					if(this.moduleInteractionIn.hasOwnProperty( this.activeModules[i].module )){
       			this.moduleInteractionIn[this.activeModules[i].module]();	
@@ -51,7 +51,13 @@ SearchApp.module("Results", function(Results, SearchApp, Backbone, Marionette, $
 			SearchApp.mainRegion.show(this.resultsView);
 			this.resultsView.on("results:show:item", function(e){
 				SearchApp.trigger("results:show:item", e);
-			})
+			});
+
+			this.resultsView.on("results:add:item", function(e){
+				SearchApp.trigger("results:add:item", e);
+
+			});
+
 			this.resultsView.setTiles();
 			//Results.Controller.resultsView = resultsView;
 			this.serveModules();
@@ -59,14 +65,14 @@ SearchApp.module("Results", function(Results, SearchApp, Backbone, Marionette, $
 		},
 
 		filterResults: function(e){
-			var filteredResults = SearchApp.request("filtered:results:entities", e);
+			var filteredResults = SearchApp.request("filterResults:search:entities", e);
 			this.renderView(filteredResults);
 			//this.resultsView.collection.reset(filteredResults);
 			//this.resultsView.setTiles();
 
 		},
 		resetResults: function(){
-			var fetchingResults = SearchApp.request("access:results:entities");
+			var fetchingResults = SearchApp.request("accessResultsData:search:entities");
 			this.renderView(fetchingResults);
 			//this.resultsView.collection.reset(filteredResults);
 			//this.resultsView.setTiles();

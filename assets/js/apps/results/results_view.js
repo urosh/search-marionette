@@ -15,22 +15,19 @@ SearchApp.module("Results", function(Results, SearchApp, Backbone, Marionette, $
 	});
 	
 
-  Results.CollectionView = Marionette.CollectionView.extend({
-    tagName: 'ul',
-    initialize: function(){
-    	this.$el.prop('id', 'tiles');
-
-    },
-    
+  Results.CollectionView = Marionette.CompositeView.extend({
+    className:'results-div',
+    template: '#results-template',
+    itemView: Results.ItemView,
+    itemViewContainer: 'ul',
     events: {
     	"mouseover #main #tiles li.tile": "editClicked",
-    	"click li": "editClicked"
     },
-	editClicked: function(){
-	
-	},
-    itemView: Results.ItemView,
-    setTiles: function(opt){
+    initialize: function(){
+        this.$el.prop("id", "main");
+        //$(.res)
+    },
+	setTiles: function(opt){
     	var opt = opt || {};
     	this.handler = $('#tiles li');
 
@@ -62,6 +59,14 @@ SearchApp.module("Results", function(Results, SearchApp, Backbone, Marionette, $
             that.trigger("results:show:item", $(this).parent().parent().attr('data-id'));
 
     	});
+        $('.icon-add').on("click", function(e){
+            e.preventDefault();
+            e.stopPropagation();
+            that.trigger("results:add:item", $(this).parent().parent().attr('data-id'));
+
+        });
+
+
     }
   });
 

@@ -24,7 +24,7 @@
        
       </div>
 
-      <div id="main" role="main" >
+      <div id="main-region"  >
         
       </div>
       
@@ -35,6 +35,7 @@
         <div id="map-region">
         
         </div>
+
       </div>
       
 
@@ -100,13 +101,34 @@
       </a>
     </script>
 
-    <script type="x-handlebars-template" id="new-collection">
-      <div id="collection-menu23">Here some menu for collection module.</div>
-      <div class="collections-div32">
-        <p>Ajmo ajde svi u napda</p>
-          <p>I kako smo se voleli nas dvoje</p>
-        <div id="items44"></div>
-      </div>
+    <script type="x-handlebars-template" id="results-template">
+        <ul id="tiles">
+
+        </ul>
+      
+    </script>
+
+
+    <script type="text/template" id="new-collection">
+        <div id="collection-menu">
+          <span class="collection-icon-1"></span>
+          <span class="collection-icon-2"></span>
+          <span class="collection-icon-3"></span>
+          <span class="collection-icon-4"></span>
+          <span class="collection-icon-5"></span>
+          <span class="collection-icon-6"></span>
+         
+        </div>
+        
+
+        <div id="collection-content">
+
+        </div>
+      
+    </script>
+
+    <script type="x-handlebars-template" id="collection-item">
+      <img src="{{ imageLocation }}" height="60"/>
     </script>
 
     <script type="x-handlebars-template" id="details-template">
@@ -165,6 +187,7 @@
 
     <script src="./assets/js/app.js"></script>
     <script src="./assets/js/entities/search.js"></script>
+    <script src="./assets/js/entities/modules.js"></script>
     
     
 

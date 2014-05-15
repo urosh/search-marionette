@@ -2,7 +2,7 @@ SearchApp.module("Menu", function(Menu, SearchApp, Backbone, Marionette, $, _){
 	Menu.Controller = {
 		activeModules: ['search', 'results', 'map'],
 		initializeMenu: function(){
-			var modulesModel = SearchApp.request("modules:entities");
+			var modulesModel = SearchApp.request("getModulesList:modules:entities");
 			var menuView = new Menu.View({model: modulesModel});
 			
 			SearchApp.menuRegion.show(menuView);

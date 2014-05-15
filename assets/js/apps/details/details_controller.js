@@ -19,13 +19,13 @@ SearchApp.module("Details", function(Details, SearchApp, Backbone, Marionette, $
 
 		},
 		serveModules: function(){
-			this.activeModules = SearchApp.request("active:modules:entities");
-				for(var i = 0, j = this.activeModules.length; i < j; i++){
-					if(this.moduleInteractionIn.hasOwnProperty( this.activeModules[i].module )){
-      			this.moduleInteractionIn[this.activeModules[i].module]();	
-      		}
-      		
-      	}
+			this.activeModules = SearchApp.request("getActiveModules:modules:entities");
+			for(var i = 0, j = this.activeModules.length; i < j; i++){
+				if(this.moduleInteractionIn.hasOwnProperty( this.activeModules[i].module )){
+    			this.moduleInteractionIn[this.activeModules[i].module]();	
+    		}
+    		
+    	}
 		},
 
 	}
